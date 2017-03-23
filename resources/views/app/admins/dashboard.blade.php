@@ -17,7 +17,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>$num_day}}<sup style="font-size: 20px">point</sup></h3>
+              <h3>123<sup style="font-size: 20px">point</sup></h3>
 
               <p>Day Earn</p>
             </div>
@@ -32,7 +32,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>$num_week}}<sup style="font-size: 20px">point</sup></h3>
+              <h3>456<sup style="font-size: 20px">point</sup></h3>
               <p>Week Earn</p>
             </div>
             <div class="icon">
@@ -46,7 +46,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>$num_month}}<sup style="font-size: 20px">point</sup></h3>
+              <h3>789<sup style="font-size: 20px">point</sup></h3>
               <p>Month Earn</p>
             </div>
             <div class="icon">
@@ -60,7 +60,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>$num_total}}<sup style="font-size: 20px">point</sup></h3>
+              <h3>0<sup style="font-size: 20px">point</sup></h3>
               <p>Total Earn</p>
             </div>
             <div class="icon">

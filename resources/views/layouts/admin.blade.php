@@ -5,7 +5,14 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ url('img/avatar') }}/{{ Auth::user()->avatar }}.jpg" class="img-circle" alt="User Image" style="height:50px;width:100px;">
+          @php($avatar = json_decode(Auth::user()->avatar))
+          <img src="
+            @if($avatar['0']==1)
+              {{ url('img/avatar') }}/{{ $avatar['1'] }}.jpg 
+            @else
+              {{ $avatar['1'] }}
+            @endif
+            " class="img-circle" alt="User Image" style="height:50px;width:70px;">
         </div>
         <div class="pull-left info">
           <h5>{{ Auth::user()->username }}</h5>
@@ -26,35 +33,32 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active"><a href="{{ url('/admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="{{ url('/admin/top') }}"><i class="fa fa-filter"></i> <span>Top</span></a></li>
+        <li class="active"><a href="{{ url('/superadmin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Users</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
-              <small class="label pull-right bg-red">$num_member_wait}}</small>
-              <small class="label pull-right bg-yellow">$num_member_off + $num_mod_off}}</small>
-              <small class="label pull-right bg-green">$num_member_on + $num_mod_on}}</small>
+              <small class="label pull-right bg-red">{{$num_admin}}</small>
+              <small class="label pull-right bg-yellow">{{$num_customer}}</small>
+              <small class="label pull-right bg-green">{{$num_member}}</small>
             </span>
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="{{ url('/admin/adminmanager') }}"><i class="fa fa-circle-o"></i> Admin Manager
-                <small class="label pull-right bg-yellow">$num_mod_off}}</small>
-                <small class="label pull-right bg-green">$num_mod_on}}</small>
+              <a href="{{ url('/superadmin/users/2') }}"><i class="fa fa-circle-o"></i> Admin Manager
+                <small class="label pull-right bg-red">{{$num_admin}}</small>
               </a>
             </li>
             <li>
-              <a href="{{ url('/admin/affiliate') }}"><i class="fa fa-circle-o"></i> Affiliate
-                <small class="label pull-right bg-yellow">$num_member_off}}</small>
-                <small class="label pull-right bg-green">$num_member_on}}</small>
+              <a href="{{ url('/superadmin/users/1') }}"><i class="fa fa-circle-o"></i> Customer
+                <small class="label pull-right bg-yellow">{{$num_customer}}</small>
               </a>
             </li>
             <li>
-              <a href="{{ url('/admin/unregistered') }}"><i class="fa fa-circle-o"></i> Unregistered Account 
-                <small class="label pull-right bg-red">$num_member_wait}}</small>
+              <a href="{{ url('/superadmin/users/0') }}"><i class="fa fa-circle-o"></i> Member
+                <small class="label pull-right bg-green">{{$num_member}}</small>
               </a>
             </li>
           </ul>
@@ -62,24 +66,43 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
-            <span>Offers</span>
+            <span>Articles</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
-              <small class="label pull-right bg-yellow">$num_android_off + $num_ios_off}}</small>
-              <small class="label pull-right bg-green">$num_android_on + $num_ios_on}}</small>
+              <small class="label pull-right bg-blue">{{$num_article_DEL+$num_article_ON}}</small>
             </span>
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href=" url('/admin/offers/android') }}"><i class="fa fa-circle-o"></i> Android
-                <small class="label pull-right bg-yellow">$num_android_off}}</small>
-                <small class="label pull-right bg-green">$num_android_on}}</small>
+              <a href=" url('/admin/offers/android') }}"><i class="fa fa-circle-o"></i> ON
+                <small class="label pull-right bg-blue">{{$num_article_ON}}</small>
               </a>
             </li>
             <li>
-              <a href=" url('/admin/offers/ios') }}"><i class="fa fa-circle-o"></i> iOS
-                <small class="label pull-right bg-yellow">$num_ios_off}}</small>
-                <small class="label pull-right bg-green">$num_ios_on}}</small>
+              <a href=" url('/admin/offers/ios') }}"><i class="fa fa-circle-o"></i> DEL
+                <small class="label pull-right">{{$num_article_DEL}}</small>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Requests</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-blue">{{$num_request_DEL+$num_request_ON}}</small>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href=" url('/admin/offers/android') }}"><i class="fa fa-circle-o"></i> ON
+                <small class="label pull-right bg-blue">{{$num_request_ON}}</small>
+              </a>
+            </li>
+            <li>
+              <a href=" url('/admin/offers/ios') }}"><i class="fa fa-circle-o"></i> DEL
+                <small class="label pull-right">{{$num_request_DEL}}</small>
               </a>
             </li>
           </ul>
@@ -92,42 +115,37 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('/admin/reports/reports_date') }}"><i class="fa fa-circle-o"></i> Report</a></li>
-            <li><a href="{{ url('/admin/reports/reports_offer') }}"><i class="fa fa-circle-o"></i> Offers</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Invoices</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="admin.php?report=create_invoice"><i class="fa fa-circle-o"></i> Create invoice</a></li>
-            <li><a href="admin.php?report=history_invoice"><i class="fa fa-circle-o"></i> History invoice</a></li>
+            <li><a href="{{ url('/admin/reports/reports_date') }}"><i class="fa fa-circle-o"></i> View</a></li>
+            <li><a href="{{ url('/admin/reports/reports_offer') }}"><i class="fa fa-circle-o"></i> Comment</a></li>
+            <li><a href="{{ url('/admin/reports/reports_offer') }}"><i class="fa fa-circle-o"></i> Start</a></li>
+            <li><a href="{{ url('/admin/reports/reports_offer') }}"><i class="fa fa-circle-o"></i> Phone</a></li>
           </ul>
         </li>
         <li>
-          <a href="{{ url('/admin/networks') }}">
-            <i class="fa fa-wifi"></i> <span>Networks</span>
-            <small class="label pull-right bg-yellow">$num_network_off}}</small>
-            <small class="label pull-right bg-green">$num_network_on}}</small>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Comments</span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href=" url('/admin/offers/android') }}"><i class="fa fa-circle-o"></i> ON
+              </a>
+            </li>
+            <li>
+              <a href=" url('/admin/offers/ios') }}"><i class="fa fa-circle-o"></i> DEL
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ url('/admin/setting') }}">
+            <i class="fa fa-table"></i> <span>Pubs</span>
           </a>
         </li>
         <li>
           <a href="{{ url('/admin/setting') }}">
             <i class="fa fa-cog"></i> <span>Setting</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ url('/ssh') }}">
-            <i class="fa fa-file-text-o"></i> <span>SSH</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ url('/exportip') }}">
-            <i class="fa fa-file-text"></i> <span>Export IP</span>
           </a>
         </li>
         <li class="header">LABELS</li>

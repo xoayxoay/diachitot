@@ -15,14 +15,14 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->Integer('user_id')->index();
-            $table->Integer('article_id')->index();
-            $table->float('pay');
-            $table->float('pay_views');
-            $table->float('pay_comments');
-            $table->float('pay_starts');
-            $table->float('pay_phones');
+            $table->increments('id')->unsigned();
+            $table->Integer('user_id')->index()->unsigned();
+            $table->Integer('article_id')->index()->unsigned();
+            $table->float('pay')->index()->unsigned();
+            $table->float('pay_views')->unsigned();
+            $table->float('pay_comments')->unsigned();
+            $table->float('pay_starts')->unsigned();
+            $table->float('pay_phones')->unsigned();
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ class CreateArticlesTable extends Migration
             $table->string('description')->nullable();
             $table->string('price')->nullable();
             $table->string('coordinates')->nullable();
+            $table->tinyInteger('status')->default(1)->comment('1 = ON, 0 = DEL');
             $table->Integer('start_1')->default('0');
             $table->Integer('start_2')->default('0');
             $table->Integer('start_3')->default('0');

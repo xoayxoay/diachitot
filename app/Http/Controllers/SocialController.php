@@ -57,7 +57,7 @@ class SocialController extends Controller
             'username' => 'fb'.$facebookUser->id,
             'name' => $facebookUser->name,
             'email' => "",
-            'avatar' => $facebookUser->avatar,
+            'avatar' => json_encode(array('0',$facebookUser->avatar)),
             'password' => bcrypt('123456'),
         ]);
     }

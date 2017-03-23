@@ -4,6 +4,7 @@ var show_table = $("#show_table").val();
 var sort_value = "id";
 var sort = "desc";
 var page = 1;
+var search = $("#search").val();
 $(function () {
     $('#show').DataTable({
     "scrollX": true,
@@ -28,6 +29,7 @@ $("#show_table").change(function(){
 				show_table : show_table,
 				sort_value : sort_value,
 				sort : sort,
+				search : search,
 				page : page
 			},
 			success : function (data){
@@ -52,6 +54,7 @@ $("#show_table").change(function(){
 								show_table : show_table,
 								sort_value : sort_value,
 								sort : sort,
+								search : search,
 								page : page
 							},
 							success : function (data){
@@ -85,6 +88,7 @@ $("#pagination").paginate({
 				page : page,
 				show_table : show_table,
 				sort_value : sort_value,
+				search : search,
 				sort : sort
 			},
 			success : function (data){
@@ -115,6 +119,27 @@ $(".sort").click(function(){
 			page : page,
 			show_table : show_table,
 			sort_value : sort_value,
+			search : search,
+			sort : sort
+		},
+		success : function (data){
+			$("#show tbody").html(data);
+			$("#info").text(((page - 1)*show_table)+1+" to "+page*show_table+" of ");
+		}
+	});
+});
+// search
+$("#search").keyup(function(){
+	search = $("#search").val();
+		$.ajax({
+		url : window.location.href,
+		type : "get",
+		dataType : "text",
+		data : {
+			page : page,
+			show_table : show_table,
+			sort_value : sort_value,
+			search : search,
 			sort : sort
 		},
 		success : function (data){

@@ -49,8 +49,11 @@
                             @else
                                 <button type="button" style="background-color:blue">LIKE</button>
                             @endif
-
-                            {{$start = ($article->start_1 + $article->start_2*2 + $article->start_3*3 + $article->start_4*4 + $article->start_5*5)/($article->start_1 + $article->start_2 + $article->start_3 + $article->start_4 + $article->start_5)}}
+                                @if ($article->start_1 + $article->start_2 + $article->start_3 + $article->start_4 + $article->start_5 == 0) 
+                                    {{$start = 0}}
+                                @else
+                                    {{$start = ($article->start_1 + $article->start_2*2 + $article->start_3*3 + $article->start_4*4 + $article->start_5*5)/($article->start_1 + $article->start_2 + $article->start_3 + $article->start_4 + $article->start_5)}}
+                                @endif
                             @if (session('start'.$article->id)!="ON")
                                 {!! Form::open(array('url' => 'articles/starts','method' => 'PUT')) !!}
                                     <input type="hidden" name="article_id" value="{{$article->id}}">

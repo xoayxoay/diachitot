@@ -15,10 +15,10 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->Integer('user_id')->index();
-            $table->Integer('article_id')->index()->nullable();
-            $table->Integer('comment_id')->index()->nullable();
+            $table->Integer('article_id')->index()->nullable()->unsigned();
+            $table->Integer('comment_id')->index()->nullable()->unsigned();
             $table->string('comment');
             $table->Integer('likes')->default('0');
             $table->timestamps();

@@ -18,13 +18,26 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ url('img/avatar') }}/{{ Auth::user()->avatar }}.jpg" class="user-image" alt="User Image">
+              @php($avatar = json_decode(Auth::user()->avatar))
+              <img src="
+              @if($avatar['0']==1)
+                {{ url('img/avatar') }}/{{ $avatar['1'] }}.jpg 
+              @else
+                {{ $avatar['1'] }}
+              @endif
+              " class="user-image" alt="User Image">
               <span class="hidden-xs">{{ Auth::user()->username }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{ url('img/avatar') }}/{{ Auth::user()->avatar }}.jpg" class="img-circle" alt="User Image">
+                <img src="
+                @if($avatar['0']==1)
+                  {{ url('img/avatar') }}/{{ $avatar['1'] }}.jpg 
+                @else
+                  {{ $avatar['1'] }}
+                @endif
+                " class="img-circle" alt="User Image">
 
                 <p>
                   {{ Auth::user()->username }}
@@ -55,7 +68,13 @@
   </header>
   <div id="avatar" style="display:none;position:fixed;top:7%;right:3%;z-index:9999;border:2px solid #035d8d;border-radius:6px;text-align:center;background:rgba(0,128,197,0.8);padding:10px;">
     <span id="close" style="position:absolute;right:5px;top:5px;cursor:pointer;border-radius:50%;font-weight:bold;border:2px solid #035d8d;padding:2px 8px;">X</span>
-    <img src="img/avatar/{{ Auth::user()->avatar }}.jpg" class="img-circle" alt="User Image" id="avatar-img" style="width:100px;height:100px;box-shadow:0 0 3px gray;">
+    <img src="
+              @if($avatar['0']==1)
+                {{ url('img/avatar') }}/{{ $avatar['1'] }}.jpg 
+              @else
+                {{ $avatar['1'] }}
+              @endif
+              " class="img-circle" alt="User Image" id="avatar-img" style="width:100px;height:100px;box-shadow:0 0 3px gray;">
     <form method="post" enctype="multipart/form-data">
       <input type="file" name="avatar-file" id="avatar-file" style="position:relative;z-index:2;">
       <button class="btn btn-info btn-sm" name="avatar-but">CHANGE</button>

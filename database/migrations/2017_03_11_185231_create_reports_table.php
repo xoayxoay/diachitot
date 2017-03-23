@@ -15,9 +15,9 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->Integer('user_id')->index();
-            $table->Integer('article_id')->index();
+            $table->increments('id')->unsigned();
+            $table->Integer('user_id')->index()->unsigned();
+            $table->Integer('article_id')->index()->unsigned();
             $table->Integer('views');
             $table->Integer('comments');
             $table->Integer('starts');

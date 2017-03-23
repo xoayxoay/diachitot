@@ -24,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $article = DB::table('articles')->where('id',2)->first();
-        $comment = DB::table('comments')->where('id',2)->first();
+        $article = DB::table('articles')->where('id',1)->first();
+        $comment = DB::table('comments')->where('id',1)->first();
         return view('home')->with(array('article'=>$article,'comment'=>$comment));
     }
 

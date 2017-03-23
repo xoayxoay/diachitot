@@ -33,6 +33,10 @@ Route::resource('articles','ArticlesController');
 Route::put('comments/like','CommentsController@likes');
 Route::resource('comments','CommentsController');
 
+// APP
+	// SUPERADMIN
+	Route::get('superadmin/users/{lever}', 'SuperadminController@users');
+
 
 Route::get('superadmin', 'SuperadminController@index');
 Route::get('admins', 'AdminsController@index');
