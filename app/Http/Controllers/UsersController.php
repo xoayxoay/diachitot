@@ -11,6 +11,7 @@ use App\User;
 use App\Users;
 use Illuminate\Http\Request;
 use App\Mail\EmailVerification;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class UsersController extends Controller
@@ -20,7 +21,18 @@ class UsersController extends Controller
 	{
 	    $user = Users::find($id);
         $user->update($request->all());
-	    return back()->withInput()->with('text', 'Offer created!');;
+	    return back()->withInput()->with('text', 'User was edited!');
+	}
+
+	public function avatar(Request $request)
+	{
+		$time = time();
+		$request->file('avatar-file')->move('img/avatar/', $time.'.jpg');
+		DB::table('users')->where('id',$request->userid)->update([
+      		'avatar'=> '["1","'.$time.'"]',
+      		'updated_at'=> date('Y-m-d H:i:s'),
+   		]);
+   		return back()->with('text', 'Avatar changed!');
 	}
 
 	// RESET PASSWORD
@@ -32,7 +44,7 @@ class UsersController extends Controller
 	      $validator = $this->admin_credential_rules($request_data);
 	    if($validator->fails())
 	    {
-	        return redirect("admin/setting")->with('errors' , $validator->getMessageBag()) ;
+	        return redirect()->back()->with('errors' , $validator->getMessageBag()) ;
 	    }
 	    else
 	    {  
@@ -44,11 +56,11 @@ class UsersController extends Controller
 	          	$obj_user->password = Hash::make($request_data['password']);
 	          	$obj_user->updated_at = date('Y-m-d H:i:s');
 	          	$obj_user->save(); 
-	          	return redirect("admin/setting")->with('text', 'Password changed!');
+	          	return redirect()->back()->with('text', 'Password changed!');
 	        }
 	        else
 	        {        
-	          	return redirect("admin/setting")->with('errors' , $validator->getMessageBag()->add('current_password', 'Please enter correct current password')) ;  
+	          	return redirect()->back()->with('errors' , $validator->getMessageBag()->add('current_password', 'Please enter correct current password')) ;  
 	        }
 	    }        
 	}

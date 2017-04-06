@@ -321,12 +321,13 @@ class ComposerStaticInitb0b77a8f7045d088dba0681172f1940b
 
     public static $classMap = array (
         'CreateArticlesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_11_000011_create_articles_table.php',
+        'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_182236_create_categories_table.php',
         'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_11_001619_create_comments_table.php',
+        'CreateDiscountsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_181423_create_discount_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreatePubsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_11_184407_create_pubs_table.php',
-        'CreateReportsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_11_185231_create_reports_table.php',
-        'CreateRequestsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_11_185641_create_requests_table.php',
+        'CreateQrsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_182824_create_qrs_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
+        'CreateViewDiscountTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_181323_create_view_discount_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',

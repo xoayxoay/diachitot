@@ -7,12 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreateArticlesTable' => $baseDir . '/database/migrations/2017_03_11_000011_create_articles_table.php',
+    'CreateCategoriesTable' => $baseDir . '/database/migrations/2017_03_30_182236_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2017_03_11_001619_create_comments_table.php',
+    'CreateDiscountsTable' => $baseDir . '/database/migrations/2017_03_30_181423_create_discount_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-    'CreatePubsTable' => $baseDir . '/database/migrations/2017_03_11_184407_create_pubs_table.php',
-    'CreateReportsTable' => $baseDir . '/database/migrations/2017_03_11_185231_create_reports_table.php',
-    'CreateRequestsTable' => $baseDir . '/database/migrations/2017_03_11_185641_create_requests_table.php',
+    'CreateQrsTable' => $baseDir . '/database/migrations/2017_03_30_182824_create_qrs_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
+    'CreateViewDiscountTable' => $baseDir . '/database/migrations/2017_03_30_181323_create_view_discount_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

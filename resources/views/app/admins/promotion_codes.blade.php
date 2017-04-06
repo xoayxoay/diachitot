@@ -1,6 +1,5 @@
 <?php 
-  if($lever == 1){$num_all = $num_admin;$title = "Admins";}
-  else {$num_all = $num_member_active+$num_member_banned;$title = "Members";}
+  $num_all = $num_promotion_codes;$title = "Promotion codes";
 ?>
 @extends('layouts.app')
 <!-- SIDEBAR -->
@@ -24,7 +23,7 @@
   <script type="text/javascript" src="{{ URL::asset('resources/assets/js/admin.js')}}"></script>
 @endsection
 
-@section('request',$title)
+@section('request',$title)le)
 
 @section('content')
   <!-- Main content -->
@@ -37,11 +36,6 @@
               <input type="hidden" name="num_table" id="num_table" value="{{$num_all}}">
               @if (session('text'))
                 <p id="response">{{ session('text') }}</p>
-              @endif
-              @if ($lever == 1)
-                <form class="pull-right">
-                  <button class="btn btn-info">ADD</button>
-                </form>
               @endif
               
             </div>
@@ -62,29 +56,29 @@
               <table id="show" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID
+                  <th>General code
                     <span class="sort"><i class="fa fa-sort-amount-desc active"></i></span>
-                    <span class="sort_value">id</span>
+                    <span class="sort_value">general_code</span>
                   </th>
-                  <th>Username
+                  <th>Article name [id]
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">username</span>
+                    <span class="sort_value">article_id</span>
                   </th>
-                  <th>Email
+                  <th>Username [id]
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">email</span>
+                    <span class="sort_value">user_id</span>
                   </th>
-                  <th>Name
+                  <th>Code
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">name</span>
+                    <span class="sort_value">code</span>
                   </th>
-                  <th>Date Create
+                  <th>Discount
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">rate</span>
+                  </th>
+                  <th>Created at
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
                     <span class="sort_value">created_at</span>
-                  </th>
-                  <th>Views
-                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">verify</span>
                   </th>
                   <th>
                   </th>
@@ -93,17 +87,13 @@
                 <tbody>
                   @foreach ($database as $row) 
                     <tr>
-                      <td>{{$row->id}}</td>
-                      <td>{{$row->username}}</td>
-                      <td>{{$row->email}}</td>
-                      <td>{{$row->name}}</td>
+                      <td>{{$row->general_code}}</td>
+                      <td>{{$row->name}}[{{$row->article_id}}]</td>
+                      <td>{{$row->username}}[{{$row->user_id}}]</td>
+                      <td>{{$row->code}}</td>
+                      <td>{{$row->rate}} %</td>
                       <td>{{$row->created_at}}</td>
-                      <td>
-                        <form action="{{ url('/superadmin/user').'/'.$row->id}}">
-                          <button class="btn btn-info">View</button>
-                        </form>
-                      </td>
-                      <td><img src=" {{ url('img/') }}/{{ ($row->verify==1 ? 'tick': 'untick') }}.png" alt="check"></td>
+                      <td><img src=" {{ url('img/') }}/{{ ($row->rate == 10 ? 'tick': 'untick') }}.png" alt="check"></td>
                     </tr>
                   @endforeach
                 </tbody>

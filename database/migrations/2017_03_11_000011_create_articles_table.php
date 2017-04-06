@@ -17,14 +17,16 @@ class CreateArticlesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->Integer('user_id')->index();
+            $table->string('name');
             $table->string('category')->index();
             $table->string('image')->nullable();
             $table->Integer('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('description')->nullable();
             $table->string('price')->nullable();
-            $table->string('coordinates')->nullable();
+            $table->tinyInteger('discount')->default(0)->comment('1 = ON, 0 = OFF');
             $table->tinyInteger('status')->default(1)->comment('1 = ON, 0 = DEL');
+            $table->string('general_code')->nullable()->comment('use when discount = 1');
             $table->Integer('start_1')->default('0');
             $table->Integer('start_2')->default('0');
             $table->Integer('start_3')->default('0');

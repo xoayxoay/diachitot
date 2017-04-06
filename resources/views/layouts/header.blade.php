@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">{{ config('app.name', 'Laravel') }}</span>
+      <span class="logo-mini">ĐCT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">{{ config('app.name', 'Laravel') }}</span>
+      <span class="logo-lg">ĐỊA CHỈ TỐT</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -75,10 +75,11 @@
                 {{ $avatar['1'] }}
               @endif
               " class="img-circle" alt="User Image" id="avatar-img" style="width:100px;height:100px;box-shadow:0 0 3px gray;">
-    <form method="post" enctype="multipart/form-data">
+    {!! Form::open(array('url'=>'user_change_avatar','method'=>'POST', 'files'=>true)) !!}
       <input type="file" name="avatar-file" id="avatar-file" style="position:relative;z-index:2;">
+      <input type="hidden" name="userid" value="{{Auth::user()->id}}">
       <button class="btn btn-info btn-sm" name="avatar-but">CHANGE</button>
-    </form>
+    {!! Form::close() !!}
   </div>
   <script type="text/javascript">
     $("#profile").click(function(){

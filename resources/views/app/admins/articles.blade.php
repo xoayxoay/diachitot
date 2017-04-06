@@ -1,6 +1,6 @@
 <?php 
-  if($lever == 1){$num_all = $num_admin;$title = "Admins";}
-  else {$num_all = $num_member_active+$num_member_banned;$title = "Members";}
+  if($discount == 1){$num_all = $num_article_discount_ON;$title = "Articles &#8827; Discounting";}
+  else {$num_all = $num_article_discount_OFF+$num_article_DEL;$title = "Articles &#8827; Normal";}
 ?>
 @extends('layouts.app')
 <!-- SIDEBAR -->
@@ -38,11 +38,6 @@
               @if (session('text'))
                 <p id="response">{{ session('text') }}</p>
               @endif
-              @if ($lever == 1)
-                <form class="pull-right">
-                  <button class="btn btn-info">ADD</button>
-                </form>
-              @endif
               
             </div>
             <!-- /.box-header -->
@@ -66,27 +61,38 @@
                     <span class="sort"><i class="fa fa-sort-amount-desc active"></i></span>
                     <span class="sort_value">id</span>
                   </th>
-                  <th>Username
-                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">username</span>
-                  </th>
-                  <th>Email
-                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">email</span>
-                  </th>
                   <th>Name
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
                     <span class="sort_value">name</span>
                   </th>
-                  <th>Date Create
+                  <th>Userid
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">user_id</span>
+                  </th>
+                  <th>Category
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">category</span>
+                  </th>
+                  @if($discount == 1)
+                  <th>General code
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">general_code</span>
+                  </th>
+                  @else
+                  <th>Status
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">status</span>
+                  </th>
+                  @endif
+                  <th>Start
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">start_5</span>
+                  </th>
+                  <th>Created at
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
                     <span class="sort_value">created_at</span>
                   </th>
-                  <th>Views
-                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">verify</span>
-                  </th>
-                  <th>
+                  <th>View
                   </th>
                 </tr>
                 </thead>
@@ -94,16 +100,30 @@
                   @foreach ($database as $row) 
                     <tr>
                       <td>{{$row->id}}</td>
-                      <td>{{$row->username}}</td>
-                      <td>{{$row->email}}</td>
                       <td>{{$row->name}}</td>
+                      <td>{{$row->user_id}}</td>
+                      <td>{{$row->category}}</td>
+                      @if($discount == 1)
+                      <td>{{$row->general_code}}</td>
+                      @else
+                      <td class="{{($row->status == 1 ? 'text-success':'text-danger')}}"><strong>{{($row->status == 1 ? 'ON':'DEL')}}</strong></td>
+                      @endif
+                      <td>
+                        @php($start = ( ($row->start_1==0) && ($row->start_2==0) && ($row->start_3==0) && ($row->start_4==0) && ($row->start_5==0) )? 0 : ( ($row->start_1 + $row->start_2*2 + $row->start_3*3 + $row->start_4*4 + $row->start_5*5) / ($row->start_1 + $row->start_2 + $row->start_3 + $row->start_4 + $row->start_5)))
+                        @for($i = 1; $i <= 5; $i++)
+                          @if($i <= $start) <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                          @elseif($i - $start < 1) <i class="fa fa-star-half-o text-yellow" aria-hidden="true"></i>
+                          @else <i class="fa fa-star-o text-yellow" aria-hidden="true"></i>
+                          @endif
+                        @endfor
+                        {{round($start,2)}}
+                      </td>
                       <td>{{$row->created_at}}</td>
                       <td>
-                        <form action="{{ url('/superadmin/user').'/'.$row->id}}">
+                        <form>
                           <button class="btn btn-info">View</button>
                         </form>
                       </td>
-                      <td><img src=" {{ url('img/') }}/{{ ($row->verify==1 ? 'tick': 'untick') }}.png" alt="check"></td>
                     </tr>
                   @endforeach
                 </tbody>

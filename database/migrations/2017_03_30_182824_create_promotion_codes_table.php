@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequestsTable extends Migration
+class CreatePromotionCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('promotion_codes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->Integer('user_id')->index()->unsigned();
             $table->Integer('article_id')->index()->unsigned();
-            $table->float('pay')->index()->unsigned();
-            $table->float('pay_views')->unsigned();
-            $table->float('pay_comments')->unsigned();
-            $table->float('pay_starts')->unsigned();
-            $table->float('pay_phones')->unsigned();
-            $table->timestamps();
+            $table->Integer('user_id')->index()->unsigned();
+            $table->string('general_code')->index();
+            $table->string('code')->nullable();
+            $table->float('rate')->default(0);   
+            $table->timestamp('created_at');
         });
     }
 
@@ -34,6 +32,6 @@ class CreateRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('promotion_codes');
     }
 }

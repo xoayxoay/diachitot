@@ -20,13 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('password');
             $table->string('name')->nullable();
+            $table->tinyInteger('status')->index()->default('1')->comment('1 = active, 0 = banned')->unsigned();
             $table->string('avatar')->nullable()->default('["1","user"]')->comment('1 = in site, 0 = out site');
-            $table->Integer('phone')->nullable();
+            $table->Integer('phone')->nullable()->unsigned();
             $table->string('address')->nullable();
-            $table->string('bank')->nullable();
-            $table->float('money')->default('0')->comment('use for customers');
-            $table->tinyInteger('lever')->index()->default('0')->comment('1 = customers, 2 = admins, 3 = superadmin');
-            $table->tinyInteger('verify')->default('0')->comment('1 = verify');
+            $table->string('cmnd_image')->nullable();
+            $table->tinyInteger('lever')->index()->default('0')->comment('1 = admins, 2 = superadmin')->unsigned();
+            $table->tinyInteger('verify')->default('0')->comment('1 = verify')->unsigned();
             $table->string('email_token')->nullable()->index();
             $table->rememberToken()->index();
             $table->timestamps();

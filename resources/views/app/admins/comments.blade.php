@@ -1,6 +1,5 @@
 <?php 
-  if($lever == 1){$num_all = $num_admin;$title = "Admins";}
-  else {$num_all = $num_member_active+$num_member_banned;$title = "Members";}
+  $num_all = $num_comments;$title = "Comments";
 ?>
 @extends('layouts.app')
 <!-- SIDEBAR -->
@@ -38,11 +37,6 @@
               @if (session('text'))
                 <p id="response">{{ session('text') }}</p>
               @endif
-              @if ($lever == 1)
-                <form class="pull-right">
-                  <button class="btn btn-info">ADD</button>
-                </form>
-              @endif
               
             </div>
             <!-- /.box-header -->
@@ -62,31 +56,33 @@
               <table id="show" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID
+                  <th>Id
                     <span class="sort"><i class="fa fa-sort-amount-desc active"></i></span>
                     <span class="sort_value">id</span>
                   </th>
-                  <th>Username
+                  <th>Username [id]
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">username</span>
+                    <span class="sort_value">user_id</span>
                   </th>
-                  <th>Email
+                  <th>Article name [id]
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">email</span>
+                    <span class="sort_value">article_id</span>
                   </th>
-                  <th>Name
+                  <th>Content
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">name</span>
+                    <span class="sort_value">comment</span>
                   </th>
-                  <th>Date Create
+                  <th>Likes
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">likes</span>
+                  </th>
+                  <th>Changed at
+                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
+                    <span class="sort_value">updated_at</span>
+                  </th>
+                  <th>Created at
                     <span class="sort"><i class="fa fa-arrows-v"></i></span>
                     <span class="sort_value">created_at</span>
-                  </th>
-                  <th>Views
-                    <span class="sort"><i class="fa fa-arrows-v"></i></span>
-                    <span class="sort_value">verify</span>
-                  </th>
-                  <th>
                   </th>
                 </tr>
                 </thead>
@@ -94,16 +90,12 @@
                   @foreach ($database as $row) 
                     <tr>
                       <td>{{$row->id}}</td>
-                      <td>{{$row->username}}</td>
-                      <td>{{$row->email}}</td>
-                      <td>{{$row->name}}</td>
+                      <td>{{$row->username}}[{{$row->user_id}}]</td>
+                      <td>{{$row->name}}[{{$row->article_id}}]</td>
+                      <td>{{$row->comment}}</td>
+                      <td>{{$row->likes}} <i class="fa fa-heart text-red" aria-hidden="true"></i></td>
+                      <td>{{$row->updated_at}}</td>
                       <td>{{$row->created_at}}</td>
-                      <td>
-                        <form action="{{ url('/superadmin/user').'/'.$row->id}}">
-                          <button class="btn btn-info">View</button>
-                        </form>
-                      </td>
-                      <td><img src=" {{ url('img/') }}/{{ ($row->verify==1 ? 'tick': 'untick') }}.png" alt="check"></td>
                     </tr>
                   @endforeach
                 </tbody>

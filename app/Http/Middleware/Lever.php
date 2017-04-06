@@ -18,17 +18,12 @@ class Lever
     public function handle($request, Closure $next)
     {
         
-        if ( Auth::check() && Auth::user()->lever == 3 && $_SERVER['REQUEST_URI'] == '/project/superadmin' )
+        if ( Auth::check() && Auth::user()->lever == 2 && ($request->is('superadmin/*')||$request->is('superadmin')) )
         {
             return $next($request);
         }
 
-        else if ( Auth::check() && Auth::user()->lever == 2 && $_SERVER['REQUEST_URI'] == '/project/admins' )
-        {
-            return $next($request);
-        }
-
-        else if ( Auth::check() && Auth::user()->lever == 1 && $_SERVER['REQUEST_URI'] == '/project/customers' )
+        else if ( Auth::check() && Auth::user()->lever == 1 && $_SERVER['REQUEST_URI'] == '/project/admins' )
         {
             return $next($request);
         }

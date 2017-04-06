@@ -32,6 +32,8 @@
   <script src="{{ URL::asset('resources/assets/js/jquery-ui.min.js')}}"></script>
   <!-- Bootstrap 3.3.6 -->
   <script src="{{ URL::asset('resources/assets/js/bootstrap.min.js')}}"></script>
+  @section('header_link')
+  @show
   <script>
     window.Laravel = <?php echo json_encode([
       'csrfToken' => csrf_token(),
@@ -39,7 +41,7 @@
   </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
     <!-- header -->
     @include('layouts/header')
     <!-- endheader -->
@@ -50,11 +52,11 @@
     <main class="content-wrapper">
       <section class="content-header">
         <h1>
-          @yield('h1')
+          Admin
           <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="{{ url('/superadmin') }}"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">@yield('request')</li>
         </ol>
       </section>
@@ -67,11 +69,13 @@
     <!-- endfooter -->
     <!-- Control Sidebar -->
     @include('layouts/control')
-</div>
-<!-- ./wrapper -->
-<!-- site -->
-<script src="{{ URL::asset('resources/assets/js/site.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ URL::asset('resources/assets/changeskin/changeskin.js')}}"></script>
+  </div>
+  <!-- ./wrapper -->
+  @section('footer_link')
+  @show
+  <!-- site -->
+  <script src="{{ URL::asset('resources/assets/js/site.js')}}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{{ URL::asset('resources/assets/changeskin/changeskin.js')}}"></script>
 </body>
 </html>
